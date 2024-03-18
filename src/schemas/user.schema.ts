@@ -1,5 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Nombre, Ubicacion } from 'src/utils/interfaces';
+import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 
 @Schema({ timestamps: true })
 export class Usuario {
@@ -9,11 +8,18 @@ export class Usuario {
   @Prop({ required: true })
   contrasena: string;
 
-  @Prop({ required: true })
-  nombre: Nombre;
+  @Prop(raw({
+    nombres: { type: String, required: true },
+    apellidoP: { type: String, required: true },
+    apellidoM: { type: String, required: true }
+  }))
+  nombre: Record<string, any>;
 
-  @Prop({})
-  ubicacion: Ubicacion;
+  @Prop(raw({
+    latitud: { type: String, required: true },
+    longitud: { type: String, required: true }
+  }))
+  ubicacion: Record<string, any>;
 
   @Prop({ required: true })
   tipoUsuario: string;
