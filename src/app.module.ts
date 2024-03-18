@@ -1,9 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './admin/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, MongooseModule.forRoot('mongodb+srv://YahirMombela:12345@cluster0.ufgdymg.mongodb.net/Busme?retryWrites=true&w=majority')],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env.development.local',
+      isGlobal: true,
+    }),
+    AuthModule,
+    MongooseModule.forRoot(process.env.MONGODBA_ACCES_URL),
+  ],
   controllers: [],
   providers: [],
 })

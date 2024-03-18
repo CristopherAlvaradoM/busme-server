@@ -2,26 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Usuario } from 'src/schemas/user.schema';
-import { CrearUsuario } from 'src/dto/usuario/CrearUsuario.dto';
-import { ActualizarUsuario } from 'src/dto/usuario/ActualizarUsuario.dto';
+import * as jwt from 'jsonwebtoken';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class AuthService {
   constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
 
-  async findAll() {
-    return await this.userModel.find();
-  }
-
-  async findOne(id: string) {
-    return await this.userModel.findById(id);
-  }
-
-  async create(user: CrearUsuario) {
-    return await this.userModel.create(user);
-  }
-
-  async update(id: string, user: ActualizarUsuario) {
-    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+  async login(correo: string, contrasena: string): Promise<object> {
+    const usuario = await this.userModel.findOne({ correo, contrasena });
+    if (!usuario) return null
+    const usuarioSerializado = JSON.stringify(usuario);
+    const token = jwt.sign({usuario: usuarioSerializado}, process.env.JWT_SECRET_KEY);
+    const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
+    return { token: tokenCifrado}
   }
 }
