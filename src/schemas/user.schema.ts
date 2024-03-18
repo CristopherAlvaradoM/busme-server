@@ -8,6 +8,9 @@ export class Usuario {
   @Prop({ required: true })
   contrasena: string;
 
+  @Prop({ required: false })
+  tokenResetPwd: string;
+
   @Prop(raw({
     nombres: { type: String, required: true },
     apellidoP: { type: String, required: true },
