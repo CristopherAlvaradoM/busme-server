@@ -11,7 +11,7 @@ export class AuthService {
   constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
 
   async login(correo: string, contrasena: string): Promise<object> {
-    const usuario = await this.userModel.findOne({ correo, contrasena });
+    const usuario = await this.userModel.findOne({ correo, contrasena, tipoUsuario: "admin" });
     if (!usuario) return null
     const usuarioSerializado = JSON.stringify(usuario);
     const token = jwt.sign({usuario: usuarioSerializado}, process.env.JWT_SECRET_KEY);
