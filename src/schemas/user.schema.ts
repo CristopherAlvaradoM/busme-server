@@ -14,7 +14,7 @@ export class Usuario {
   @Prop(raw({
     nombres: { type: String, required: true },
     apellidoP: { type: String, required: true },
-    apellidoM: { type: String, required: true }
+    apellidoM: { type: String }
   }))
   nombre: Record<string, any>;
 
