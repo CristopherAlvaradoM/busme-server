@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Usuario } from 'src/schemas/user.schema';
 import * as jwt from 'jsonwebtoken';
 import * as CryptoJS from 'crypto-js';
+import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
 
 @Injectable()
 export class AuthService {
@@ -17,4 +18,10 @@ export class AuthService {
     const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
     return { token: tokenCifrado}
   }
+
+  async createUser(usuario: CrearUsuarioDto): Promise<Usuario> {
+    const nuevoUsuario = new this.userModel(usuario);
+    return nuevoUsuario.save();
+  }
+
 }

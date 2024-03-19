@@ -1,5 +1,6 @@
-import { Controller, Get, Query, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Query, NotFoundException, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
 
 @Controller('admin/auth')
 export class AuthController {
@@ -18,5 +19,10 @@ export class AuthController {
       const auth =  await this.authService.login(correo, contrasena);
       if(!auth) throw new NotFoundException('Usuario no encontrado');
       return auth;
+  }
+
+  @Post()
+  async createUser(@Body() usuario: CrearUsuarioDto) {
+    return this.authService.createUser(usuario);
   }
 }

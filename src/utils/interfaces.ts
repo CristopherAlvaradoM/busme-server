@@ -1,7 +1,7 @@
 export interface Nombre {
   nombres: string,
   apellidoP: string,
-  apellidoM: string
+  apellidoM?: string
 }
 
 export interface Ubicacion {

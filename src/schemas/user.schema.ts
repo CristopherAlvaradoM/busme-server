@@ -11,13 +11,13 @@ export class Usuario {
   @Prop(raw({
     nombres: { type: String, required: true },
     apellidoP: { type: String, required: true },
-    apellidoM: { type: String, required: true }
+    apellidoM: { type: String }
   }))
   nombre: Record<string, any>;
 
   @Prop(raw({
-    latitud: { type: String, required: true },
-    longitud: { type: String, required: true }
+    latitud: { type: String },
+    longitud: { type: String }
   }))
   ubicacion: Record<string, any>;
 
