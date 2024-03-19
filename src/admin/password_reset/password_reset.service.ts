@@ -8,6 +8,8 @@ import { Usuario } from 'src/schemas/user.schema';
 export class PasswordResetService {
   constructor(@InjectModel(Usuario.name) private usuarioModel: Model<Usuario>, private readonly mailService: MailerService) {}
 
+  URL: string = 'http://localhost:3000/password-reset?token=';
+
   async enviarCorreoToken(correo: string): Promise<boolean> {
     const usuario = await this.usuarioModel.findOne({ correo });
     if(!usuario) return false;
@@ -18,7 +20,7 @@ export class PasswordResetService {
       await this.mailService.sendMail({
         to: correo,
         subject: 'Cambio de contraseña',
-        text: `Para cambiar tu contraseña, haz click en el siguiente enlace: http://localhost:3000/password-reset?token=${usuario.tokenResetPwd}`
+        text: `Para cambiar tu contraseña, haz click en el siguiente enlace: ${this.URL}${usuario.tokenResetPwd}`
       });
     };
 
