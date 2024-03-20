@@ -19,7 +19,7 @@ export class PasswordResetController {
     } catch (error) {
       if(error.message === 'Usuario no encontrado') throw new NotFoundException('Usuario no encontrado');
       if(error.message === 'Token inválido') throw new BadRequestException('Token inválido');
-      throw new BadRequestException('Faltan datos');
+      
     }
   }
 }

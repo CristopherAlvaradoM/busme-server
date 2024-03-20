@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { Usuario } from 'src/schemas/user.schema';
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
+import { template } from 'src/templates/reset-password.template';
 
 @Injectable()
 export class PasswordResetService {
@@ -21,7 +22,7 @@ export class PasswordResetService {
       await this.mailService.sendMail({
         to: correo,
         subject: 'Cambio de contraseña',
-        text: `Para cambiar tu contraseña, haz click en el siguiente enlace: ${this.URL}${usuario.tokenResetPwd}`
+        html: template(this.URL + usuario.tokenResetPwd)
       });
     };
     await enviarCorreo();
