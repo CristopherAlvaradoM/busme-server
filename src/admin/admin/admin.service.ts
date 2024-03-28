@@ -18,4 +18,8 @@ export class AdminService {
     nuevoUsuario.contrasena = encriptedPwd
     return await nuevoUsuario.save();
   }
+
+  async findAll(): Promise<Usuario[]> {
+    return await this.userModel.find({tipoUsuario: 'admin'})
+  }
 }
