@@ -1,0 +1,21 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
+import { Usuario } from 'src/schemas/user.schema';
+import * as bcrypt from 'bcrypt'
+
+@Injectable()
+export class AdminService {
+  constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
+
+
+  async createAdmin(usuario: CrearUsuarioDto): Promise<object> {
+    if(usuario.tipoUsuario !== 'admin') return null
+    const nuevoUsuario = new this.userModel(usuario);
+    const salt = await bcrypt.genSalt(10)
+    const encriptedPwd = await bcrypt.hash(nuevoUsuario.contrasena, salt)
+    nuevoUsuario.contrasena = encriptedPwd
+    return await nuevoUsuario.save();
+  }
+}

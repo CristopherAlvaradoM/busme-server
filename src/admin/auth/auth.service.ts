@@ -5,8 +5,6 @@ import { Usuario } from 'src/schemas/user.schema';
 import * as jwt from 'jsonwebtoken';
 import * as CryptoJS from 'crypto-js';
 import * as bcrypt from 'bcrypt'
-import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
-
 @Injectable()
 export class AuthService {
   constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
@@ -21,13 +19,4 @@ export class AuthService {
     const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
     return { token: tokenCifrado}
   }
-
-  async createUser(usuario: CrearUsuarioDto): Promise<Usuario> {
-    const nuevoUsuario = new this.userModel(usuario);
-    const salt = await bcrypt.genSalt(10)
-    const encriptedPwd = await bcrypt.hash(nuevoUsuario.contrasena, salt)
-    nuevoUsuario.contrasena = encriptedPwd
-    return await nuevoUsuario.save();
-  }
-
 }
