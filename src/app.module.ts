@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { PasswordResetModule } from './admin/password_reset/password_reset.module';
+import { AdminModule } from './admin/admin/admin.module';
 
 
 @Module({
@@ -12,6 +13,7 @@ import { PasswordResetModule } from './admin/password_reset/password_reset.modul
       envFilePath: '.env.development.local',
       isGlobal: true,
     }),
+    AdminModule,
     AuthModule,
     PasswordResetModule,
     MongooseModule.forRoot(process.env.MONGODBA_ACCES_URL),
