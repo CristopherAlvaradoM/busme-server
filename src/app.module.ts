@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AuthModule } from './admin/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { PasswordResetModule } from './admin/password_reset/password_reset.module';
 import { AdminModule } from './admin/admin/admin.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 
 @Module({
@@ -38,4 +39,11 @@ import { AdminModule } from './admin/admin/admin.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+    .apply(LoggerMiddleware)
+    .exclude('admin/login', 'admin/password-reset')
+    .forRoutes('admin')
+  }
+}

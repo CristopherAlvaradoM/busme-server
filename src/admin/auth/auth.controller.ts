@@ -1,7 +1,7 @@
 import { Controller, Get, Query, NotFoundException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
-@Controller('admin/auth')
+@Controller('admin/login')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
