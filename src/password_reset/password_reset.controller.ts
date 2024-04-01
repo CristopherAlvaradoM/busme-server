@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, NotFoundException, Patch, Query } from '@nestjs/common';
 import { PasswordResetService } from './password_reset.service';
 
-@Controller('admin/password-reset')
+@Controller('password-reset')
 export class PasswordResetController {
   constructor(private passwordResetService: PasswordResetService) {}
 
