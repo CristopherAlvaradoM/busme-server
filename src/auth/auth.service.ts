@@ -10,7 +10,7 @@ export class AuthService {
   constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
 
   async login(correo: string, contrasena: string): Promise<object> {
-    const usuario = await this.userModel.findOne({ correo, tipoUsuario: "admin" });
+    const usuario = await this.userModel.findOne({ correo });
     if (!usuario) return null
     const auth = await bcrypt.compare(contrasena, usuario.contrasena);
     if(!auth) return null

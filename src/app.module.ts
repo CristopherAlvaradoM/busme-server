@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AuthModule } from './admin/auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { PasswordResetModule } from './admin/password_reset/password_reset.module';
-import { AdminModule } from './admin/admin/admin.module';
+import { PasswordResetModule } from './password_reset/password_reset.module';
+import { AdminModule } from './admin/admin.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 
