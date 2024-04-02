@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
 
@@ -17,4 +17,10 @@ export class AdminController {
   async finAll() {
     return await this.adminService.findAll()
   }
+
+  @Delete(':id')
+  async deleteOne(@Query('id') id: string) {
+    return await this.adminService.deleteOne(id)
+  }
+
 }
