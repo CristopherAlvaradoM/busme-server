@@ -14,8 +14,7 @@ export class AuthService {
     if (!usuario) return null
     const auth = await bcrypt.compare(contrasena, usuario.contrasena);
     if(!auth) return null
-    const usuarioSerializado = JSON.stringify(usuario);
-    const token = jwt.sign({usuario: usuarioSerializado}, process.env.JWT_SECRET_KEY);
+    const token = jwt.sign({ usuario }, process.env.JWT_SECRET_KEY);
     const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
     return { token: tokenCifrado}
   }
