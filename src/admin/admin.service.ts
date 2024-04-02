@@ -22,4 +22,8 @@ export class AdminService {
   async findAll(): Promise<Usuario[]> {
     return await this.userModel.find({tipoUsuario: 'admin'})
   }
+
+  async deleteOne(id: string) {
+    return await this.userModel.deleteOne({_id: id});
+  }
 }
