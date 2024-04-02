@@ -4,14 +4,17 @@ import { Model } from 'mongoose';
 import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
 import { Usuario } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt'
+import { Rol } from 'src/schemas/roles.schema';
 
 @Injectable()
 export class AdminService {
-  constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>) {}
+  constructor(@InjectModel(Usuario.name) private userModel: Model<Usuario>,
+              @InjectModel(Rol.name) private rolModel: Model<Rol>) {}
 
 
   async createAdmin(usuario: CrearUsuarioDto): Promise<object> {
-    if(usuario.tipoUsuario !== 'admin') return null
+    const rol = await this.rolModel.findOne({nombre: usuario.tipoUsuario})
+    if(!rol) return null
     const nuevoUsuario = new this.userModel(usuario);
     const salt = await bcrypt.genSalt(10)
     const encriptedPwd = await bcrypt.hash(nuevoUsuario.contrasena, salt)
