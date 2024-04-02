@@ -6,7 +6,7 @@ export class Rol {
   nombre: string;
 
   @Prop({ required: true })
-  acceso: string[];
+  acceso: object[];
 }
 
 export const RolSchema = SchemaFactory.createForClass(Rol);

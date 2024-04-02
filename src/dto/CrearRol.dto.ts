@@ -8,5 +8,5 @@ export class CrearRolDto {
 
   @IsNotEmpty()
   @IsArray()
-  acceso: string[];
+  acceso: object[];
 }
