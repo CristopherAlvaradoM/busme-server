@@ -6,6 +6,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { PasswordResetModule } from './password_reset/password_reset.module';
 import { AdminModule } from './admin/admin.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { RolsModule } from './rols/rols.module';
 
 
 @Module({
@@ -34,7 +35,8 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
       defaults: {
         from: "'No Reply' <busmetest@gmail.com>"
       },
-    })
+    }),
+    RolsModule
   ],
   controllers: [],
   providers: [],
