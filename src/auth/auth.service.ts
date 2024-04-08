@@ -16,10 +16,11 @@ export class AuthService {
     if (!usuario) return null
     const auth = await bcrypt.compare(contrasena, usuario.contrasena);
     if(!auth) return null
-    const rol = await this.rolModel.findOne({nombre: usuario.tipoUsuario})
-    if(!rol) return null
+    const roles = await this.rolModel.find();
+    const userRolAuth = roles.find(rol => rol.nombre === usuario.tipoUsuario);
+    if(!userRolAuth) return null
     const token = jwt.sign({ usuario }, process.env.JWT_SECRET_KEY);
     const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
-    return { token: tokenCifrado, acceso: rol.acceso}
+    return { token: tokenCifrado}
   }
 }
