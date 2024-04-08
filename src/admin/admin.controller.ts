@@ -8,7 +8,7 @@ export class AdminController {
 
   @Post()
   async create(@Body() usuario: CrearUsuarioDto) {
-      const newUser =  this.adminService.createAdmin(usuario);
+      const newUser =  await this.adminService.createAdmin(usuario);
       if(!newUser) throw new BadRequestException({mensaje: 'Peticion invalida'})
       return newUser
   }
