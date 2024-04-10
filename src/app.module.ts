@@ -45,7 +45,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
     .apply(LoggerMiddleware)
-    .exclude('admin/login', 'admin/password-reset')
+    .exclude('login', 'password-reset')
     .forRoutes('admin')
   }
 }

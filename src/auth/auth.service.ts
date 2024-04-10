@@ -21,6 +21,6 @@ export class AuthService {
     if(!userRolAuth) return null
     const token = jwt.sign({ usuario }, process.env.JWT_SECRET_KEY);
     const tokenCifrado = CryptoJS.AES.encrypt(token, process.env.CRYPTO_SECRET_KEY).toString();
-    return { token: tokenCifrado}
+    return { token: tokenCifrado, rol: usuario.tipoUsuario}
   }
 }
