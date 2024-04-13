@@ -7,6 +7,7 @@ import { PasswordResetModule } from './password_reset/password_reset.module';
 import { AdminModule } from './admin/admin.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { RolsModule } from './rols/rols.module';
+import { VerifyModule } from './verify/verify.module';
 
 
 @Module({
@@ -36,7 +37,8 @@ import { RolsModule } from './rols/rols.module';
         from: "'No Reply' <busmetest@gmail.com>"
       },
     }),
-    RolsModule
+    RolsModule,
+    VerifyModule
   ],
   controllers: [],
   providers: [],
