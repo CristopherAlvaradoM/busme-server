@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Post, Query, UnauthorizedException } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
 
@@ -21,6 +21,13 @@ export class AdminController {
   @Delete(':id')
   async deleteOne(@Query('id') id: string) {
     return await this.adminService.deleteOne(id)
+  }
+
+  @Get(':token')
+  async hasAcces(@Query('token') token: string, @Query('route') route: string) {
+    const access =  await this.adminService.hasAcces(token, route);
+    if(!access) throw new UnauthorizedException({mensaje: 'No tienes acceso a esta ruta'})
+    return true
   }
 
 }

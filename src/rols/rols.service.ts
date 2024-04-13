@@ -12,4 +12,8 @@ export class RolsService {
     const newRol = new this.rolModel(rol);
     return await newRol.save();
   }
+
+  async findAll(): Promise<object> {
+    return await this.rolModel.find();
+  }
 }
