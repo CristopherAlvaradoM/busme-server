@@ -26,6 +26,9 @@ export class Usuario {
 
   @Prop({ required: true })
   tipoUsuario: string;
+
+  @Prop({ required: true })
+  telefono: string;
 }
 
 export const UsuarioSchema = SchemaFactory.createForClass(Usuario);
