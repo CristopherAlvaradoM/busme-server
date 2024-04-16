@@ -11,7 +11,7 @@ import { template } from 'src/templates/reset-password.template';
 export class PasswordResetService {
   constructor(@InjectModel(Usuario.name) private usuarioModel: Model<Usuario>, private readonly mailService: MailerService) {}
 
-  URL: string = 'http://localhost:3000/password-reset?token=';
+  URL: string = 'http://localhost:3001/recover-password?token=';
 
   async enviarCorreoToken(correo: string): Promise<boolean> {
     const usuario = await this.usuarioModel.findOne({ correo });

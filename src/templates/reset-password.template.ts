@@ -20,10 +20,10 @@ export const template = (link: string) => {
   </head>
   <body>
     <div class="container">
-      <h1>Busme</h1>
+      <h1>BusMe</h1>
       <h3>Cambio de contraseña</h3>
       <p>Estimado usuario</p>
-      <p>Una peticion de cambio de contraseña ha sido solicitada a esta direccion de correo electronico, si usted no ha sido el responsable, haga caso omiso a este correo electrónico. Si usted ha solicitado el cambio de contraseña, haga click <a href="${link}" target="_blank">aquí</a> </p>
+      <p>Una peticion de cambio de contraseña ha sido solicitada a esta direccion de correo electrónico, si usted no ha sido el responsable, haga caso omiso a este correo electrónico. Si usted ha solicitado el cambio de contraseña, haga click <a href="${link}" target="_blank">aquí</a> </p>
     </div>
   </body>
 </html>

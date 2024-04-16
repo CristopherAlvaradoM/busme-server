@@ -15,6 +15,8 @@ export class AuthController {
    */
   @Get()
    async auth(@Query('correo') correo: string, @Query('contrasena') contrasena: string){
+    console.log(correo, contrasena);
+    
       const auth =  await this.authService.login(correo, contrasena);
       if(!auth) throw new NotFoundException('Usuario no encontrado');
       return auth;
