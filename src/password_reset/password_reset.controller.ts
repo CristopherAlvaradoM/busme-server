@@ -1,5 +1,6 @@
-import { BadRequestException, Body, Controller, NotFoundException, Patch, Query } from '@nestjs/common';
+import { BadRequestException, Controller, NotFoundException, Patch, Query } from '@nestjs/common';
 import { PasswordResetService } from './password_reset.service';
+
 
 @Controller('password-reset')
 export class PasswordResetController {
@@ -7,13 +8,15 @@ export class PasswordResetController {
 
   @Patch('password')
   async enviarToken(@Query('correo') correo: string){
+    console.log("eit");
     const hecho = await this.passwordResetService.enviarCorreoToken(correo);
     if(!hecho) throw new NotFoundException('Usuario no encontrado');
     return hecho;
   }
 
   @Patch('token')
-  async reestablecerPwd(@Body('token') token: string, @Body('pwd') pwd: string){
+  async reestablecerPwd(@Query('token') token: string, @Query('pwd') pwd: string){
+    console.log(token, pwd);
     try {
       return await this.passwordResetService.reestablecerPwd(token, pwd);
     } catch (error) {
