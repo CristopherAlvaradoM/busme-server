@@ -8,6 +8,8 @@ import { AdminModule } from './admin/admin.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { RolsModule } from './rols/rols.module';
 import { VerifyModule } from './verify/verify.module';
+import { CoordinatesGateway } from './websocket/gateway';
+import { VehiculosModule } from './vehiculos/vehiculos.module';
 
 
 @Module({
@@ -18,6 +20,7 @@ import { VerifyModule } from './verify/verify.module';
     }),
     AdminModule,
     AuthModule,
+    VehiculosModule,
     PasswordResetModule,
     MongooseModule.forRoot(process.env.MONGODBA_ACCES_URL),
     MailerModule.forRoot({
@@ -38,10 +41,12 @@ import { VerifyModule } from './verify/verify.module';
       },
     }),
     RolsModule,
-    VerifyModule
+    VerifyModule,
+    VehiculosModule,
+    VehiculosModule
   ],
   controllers: [],
-  providers: [],
+  providers: [CoordinatesGateway],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
