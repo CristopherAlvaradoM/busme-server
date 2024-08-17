@@ -1,6 +1,7 @@
-import { BadRequestException, Body, Controller, Delete, Get, Post, Query, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Query, UnauthorizedException } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CrearUsuarioDto } from 'src/dto/CrearUsuario.dto';
+import { log } from 'console';
 
 @Controller('admin')
 export class AdminController {
@@ -19,7 +20,8 @@ export class AdminController {
   }
 
   @Delete(':id')
-  async deleteOne(@Query('id') id: string) {
+  async deleteOne(@Param('id') id: string) {
+    console.log(id);
     return await this.adminService.deleteOne(id)
   }
 
