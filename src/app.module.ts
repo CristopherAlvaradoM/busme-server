@@ -10,6 +10,7 @@ import { RolsModule } from './rols/rols.module';
 import { VerifyModule } from './verify/verify.module';
 import { CoordinatesGateway } from './websocket/gateway';
 import { VehiculosModule } from './vehiculos/vehiculos.module';
+import { AnalisisDatosModule } from './analisis_datos/analisis_datos.module';
 
 
 @Module({
@@ -43,7 +44,8 @@ import { VehiculosModule } from './vehiculos/vehiculos.module';
     RolsModule,
     VerifyModule,
     VehiculosModule,
-    VehiculosModule
+    VehiculosModule,
+    AnalisisDatosModule
   ],
   controllers: [],
   providers: [CoordinatesGateway],
